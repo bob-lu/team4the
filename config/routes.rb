@@ -11,5 +11,5 @@ Team4the::Application.routes.draw do
   post '/login', :to => 'session#create'
 
   match '/logout', :to => 'session#destroy'
-
+  get "/dashboard" => "page#dashboard"
 end
