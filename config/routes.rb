@@ -1,4 +1,6 @@
 Team4the::Application.routes.draw do
+  resources :teams
+
   resources :users
 
   resources :achievements
