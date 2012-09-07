@@ -1,4 +1,6 @@
 Team4the::Application.routes.draw do
+  resources :users
+
   resources :achievements
 
   root :to => 'page#index'
