@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
   attr_accessible :username, :password_confirmation, :password
   has_many :workouts
   has_many :achievement_points
+  belongs_to :team
 end
