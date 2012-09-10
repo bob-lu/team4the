@@ -48,6 +48,35 @@ $(function () {
 	}
 	
 	/**
+	 * Alert template
+	 *
+	 * @param {String} klass CSS class
+	 * @param {String} html
+	 * @return {String}
+	 */
+	
+	function alertTemplate(klass, html) {
+		var tmpl = ['<div class="alert ' + klass + '">', '<a href="#" class="close" data-dismiss="alert">x</a>'];
+		tmpl.push(html);
+		tmpl.push('</div>');
+		return tmpl.join('\n');
+	}
+	
+	$.getJSON('/achievements.json', function (data) {
+		var i = 0
+		  , max = {};
+		  
+		for (; i < data.length; i++) {
+			if (!max[data[i].name]) max[data[i].name] = { points: 0, user: '' };
+			if (max[data[i].name].points < data[i].points) {
+				max[data[i].name] = { points: data[i].points, user: data[i].user }
+			}
+		}
+		
+		window.max = max;
+	});
+	
+	/**
 	 * Load right template and data on change event
 	 */
 	
@@ -56,17 +85,27 @@ $(function () {
 		if (id) {
 			var elm = $('input[data-id=' + id + ']')
 			  , single = elm.data('single')
-			  , ach = achivements[elm.data('name')];
+			  , name = elm.data('name')
+			  , ach = achivements[name];
 			
 			if (Object.keys(ach).length) {
 				if (single) {
 					$('#formTmpl').empty().append(dropDownTemplate(ach)).append(actionsTemplate);
+					if (max[name]) {
+						var message = 'Hey! <strong>{user}</strong> in your team alreday did this achievement and did get <strong>{points}</strong> points!'
+													.replace('{user}', max[name].user)
+													.replace('{points}', max[name].points);
+													
+						$('.span8').html(alertTemplate('alert-success', message));
+					} else {
+						$('.span8').empty();
+					}
 				} else {
 					// multi achievement
 				}
 			}
 		} else {
-			$('#formTmpl').empty();
+			$('#formTmpl, .span8').empty();
 		}
 	});
 	

@@ -3,10 +3,10 @@ class AchievementsController < ApplicationController
   # GET /achievements.json
   def index
     @achievements = Achievement.all
-    
+    team_achievements = Achievement.team_points(current_user.team)
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @achievements }
+      format.html
+      format.json { render json: team_achievements }
     end
   end
 

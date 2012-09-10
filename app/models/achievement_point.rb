@@ -2,4 +2,8 @@ class AchievementPoint < ActiveRecord::Base
   attr_accessible :point, :user, :achievement
   belongs_to :user
   belongs_to :achievement
+  
+  def self.find_by_user(user)
+    self.where(:user_id => user)
+  end
 end
