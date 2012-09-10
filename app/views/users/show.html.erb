@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 <div class="box">
+  <% if current_user == @user %>
   <p class="pull-right">
     <%= link_to 'Edit', edit_user_path(@user) %>    
   </p>
+  <% end %>
   
   <p>
     <b>Username:</b>

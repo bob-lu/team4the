@@ -29,23 +29,17 @@
           </a>
           <%= link_to "Team 4 The Pig @ Isotop", dashboard_path, :class => "brand" %>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li><%= link_to "Dashboard", dashboard_path %></li>
-              <li><%= link_to "New workout", new_workout_path %></li>
-              <li><%= link_to "My team", team_path %>
-            </ul>
             <% if is_signed_in? %>
+              <ul class="nav">
+                <li><%= link_to "Dashboard", dashboard_path %></li>
+                <li><%= link_to "New workout", new_workout_path %></li>
+                <li><%= link_to "My team", team_path %>
+              </ul>
               <ul class="nav pull-right">
                 <li><%= link_to "Welcome, #{current_user.username}!", current_user %></li>
                 <li><%= link_to "Edit profile", edit_user_path(current_user) %>
-                <li><%= link_to "Logout", logout_path %></li>
+                <li><%= link_to "Sign out", logout_path %></li>
               </ul>
-            <% else %>
-              <form class="navbar-form pull-right">
-                <input class="span2" type="text" placeholder="Email">
-                <input class="span2" type="password" placeholder="Password">
-                <button type="submit" class="btn">Sign in</button>
-              </form>
             <% end %>
           </div><!--/.nav-collapse -->
         </div>

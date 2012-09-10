@@ -35,6 +35,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    redirect_to dashboard_path unless current_user == @user
   end
 
   # POST /users
