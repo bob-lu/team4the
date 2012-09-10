@@ -1,25 +1,23 @@
 <p id="notice"><%= notice %></p>
+<div id="user_profile">
+  <p class="pull-right">
+    <%= link_to 'Edit', edit_user_path(@user) %>    
+  </p>
+  
+  <p>
+    <b>Username:</b>
+    <%= @user.username %>
+  </p>
 
-<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
+  <p>
+    <b>Nike:</b>
+    <%= @user.nike_id %>
+  </p>
 
-<p>
-  <b>Password digest:</b>
-  <%= @user.password_digest %>
-</p>
-
-<p>
-  <b>Nike:</b>
-  <%= @user.nike_id %>
-</p>
-
-<p>
-  <b>Nike password:</b>
-  <%= @user.nike_password %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <% if @user.team %>
+  <p>
+    <b>Team:</b>
+    <%= @user.team.name %>
+  </p>
+  <% end %>
+</div>
