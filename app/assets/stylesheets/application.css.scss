@@ -19,4 +19,13 @@ body {
   padding-bottom: 40px;
 }
 
-@import "users";
+#notice,
+.box {
+  width: 250px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.box {
+  border: 1px solid #eaeaea;
+}

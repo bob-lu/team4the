@@ -2,12 +2,8 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @teams }
-    end
+    redirect_to dashboard_path unless current_user.team
+    @team = current_user.team
   end
 
   # GET /teams/1

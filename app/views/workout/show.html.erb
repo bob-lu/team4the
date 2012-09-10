@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+<div class="box">
+	<p class="pull-right">
+		<%= link_to 'Edit', edit_workout_path(@workout) %>    
+	</p>
+
+	<p>
+		<b>Workout date:</b>
+		<%= @workout.workout_date %>
+	</p>
+
+	<p>
+		<b>Description:</b>
+		<%= @workout.description %>
+	</p>
+</div>

@@ -19,5 +19,11 @@ class WorkoutController < ApplicationController
 		end
 	end
 	
-	def show; end
+	def show
+		@workout = Workout.find(params[:id])
+		
+		respond_to do |format|
+			format.html
+		end	
+	end
 end
