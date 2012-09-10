@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20120907120639) do
     t.integer  "user_id",        :null => false
     t.integer  "achievement_id", :null => false
     t.integer  "point",          :null => false
+    t.string   "description"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

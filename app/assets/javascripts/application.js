@@ -14,3 +14,15 @@
 //= require jquery_ujs
 //= require bootstrap-datepicker
 //= require_tree .
+
+if (typeof Object.keys !== 'function') {
+	Object.keys = function( obj ) {
+		var array = new Array();
+		for (var prop in obj) {
+			if (obj.hasOwnProperty(prop)) {
+				array.push(prop);
+			}
+		}
+		return array;
+	};
+}

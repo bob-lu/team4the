@@ -3,7 +3,7 @@ class AchievementsController < ApplicationController
   # GET /achievements.json
   def index
     @achievements = Achievement.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @achievements }
@@ -38,17 +38,18 @@ class AchievementsController < ApplicationController
   end
 
   # POST /achievements
-  # POST /achievements.json
   def create
-    @achievement = Achievement.new(params[:achievement])
-
+    achievement = Achievement.find(params[:achievement][:id])
+    
+    if achievement.is_single_point
+      achievementPoint = AchievementPoint.create({ point: params[:achievement][:value], user: current_user, achievement: achievement })
+    end
+    
     respond_to do |format|
-      if @achievement.save
-        format.html { redirect_to @achievement, notice: 'Achievement was successfully created.' }
-        format.json { render json: @achievement, status: :created, location: @achievement }
+      if true
+        format.html { redirect_to achievements_path, notice: 'Achievements was successfully saved.' }
       else
-        format.html { render action: "new" }
-        format.json { render json: @achievement.errors, status: :unprocessable_entity }
+        format.html { redirect_to achievements_path, notice: error }
       end
     end
   end

@@ -1,3 +1,20 @@
+<h3>Achievement</h3>
+<div class="row">
+  <%= form_for(:achievement, :url => achievements_path) do |f| %>
+    <div class="span4">
+      <%= collection_select(:achievement, :id, @achievements, :id, :name, {:prompt => true}) %>
+      <div id="formTmpl"></div>
+    </div>
+    <div class="span8" style="display:none">
+  </div>
+  <% end %>
+</div>
+
+<% @achievements.each do |a| %>
+  <%= hidden_field :"#{a.id}", :"#{a.name.downcase}", :"data-id" => a.id, :"data-single" => a.is_single_point, :"data-name" => a.name.downcase.underscore %>
+<% end %>
+
+<!--
 <h1>Listing achievements</h1>
 
 <table>
@@ -25,3 +42,4 @@
 <br />
 
 <%= link_to 'New Achievement', new_achievement_path %>
+-->

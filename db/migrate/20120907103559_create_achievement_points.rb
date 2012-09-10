@@ -4,7 +4,7 @@ class CreateAchievementPoints < ActiveRecord::Migration
       t.integer :user_id, :required => true, :null => false
       t.integer :achievement_id, :required => true, :null => false
       t.integer :point, :required => true, :null => false
-
+      t.string  :description
       t.timestamps
     end
   end
