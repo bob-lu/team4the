@@ -5,6 +5,8 @@ Team4the::Application.routes.draw do
 
   resources :achievements
 
+  resources :workout
+
   root :to => 'page#index'
 
   get '/login', :to => 'session#new'

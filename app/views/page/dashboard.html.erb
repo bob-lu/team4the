@@ -5,7 +5,11 @@
 	<div class="span4">
 		<h2>Completed workouts</h2>
 		<% @workouts.each do |workout| %>
-			<%= workout.name %>
+			<p>
+				<%= workout.description %>
+				-
+				<%= link_to workout.workout_date, workout %>
+			</p>
 		<% end -%>
 	</div>
 </div>
