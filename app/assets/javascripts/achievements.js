@@ -62,6 +62,11 @@ $(function () {
 		return tmpl.join('\n');
 	}
 	
+	/**
+	 * Get team achievements direct when the page is loaded
+	 * and get the max point for each achivement.
+	 */
+	
 	$.getJSON('/achievements.json', function (data) {
 		var i = 0
 		  , max = {};
@@ -92,7 +97,7 @@ $(function () {
 				if (single) {
 					$('#formTmpl').empty().append(dropDownTemplate(ach)).append(actionsTemplate);
 					if (max[name]) {
-						var message = 'Hey! <strong>{user}</strong> in your team alreday did this achievement and did get <strong>{points}</strong> points!'
+						var message = 'Hey! <strong>{user}</strong> in your team alreday did this achievement and received <strong>{points}</strong> points!'
 													.replace('{user}', max[name].user)
 													.replace('{points}', max[name].points);
 													
