@@ -43,8 +43,11 @@ class AchievementsController < ApplicationController
     
     if achievement.is_single_point
       achievementPoint = AchievementPoint.new({ point: achievement.point, user: current_user, achievement: achievement })
+    else
+      # You can access multi achievement value via "params[:achievement][:value]"
+      # It maybe a string so you can do something like ".to_i" to convert to a integer.
     end
-    
+        
     respond_to do |format|
       if achievementPoint.save
         format.html { redirect_to achievements_path, notice: 'Achievements was successfully saved.' }
