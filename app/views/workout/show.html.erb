@@ -1,16 +1,27 @@
 <p id="notice"><%= notice %></p>
 <div class="box">
-	<p class="pull-right">
-		<%= link_to 'Edit', edit_workout_path(@workout) %>    
+	
+	<% if @workout.user == current_user %>
+	<p class="pull-right meta">
+		<%= link_to 'Edit', edit_workout_path(@workout) %> |
+		<%= link_to 'Delete', workout_path(@workout), method: :delete, data: {
+			confirm: 'Are you sure?'
+		}%>    
 	</p>
-
+	<% end %>
+	
 	<p>
 		<b>Workout date:</b>
+	</p>
+	<p>
 		<%= @workout.workout_date %>
 	</p>
 
 	<p>
 		<b>Description:</b>
+	</p>
+	<p>
 		<%= @workout.description %>
 	</p>
+	<div class="clear"></div>
 </div>
