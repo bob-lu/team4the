@@ -115,7 +115,9 @@ $(function () {
 	$('body').on('keyup', '#achievement_value', function (e) {
 		var val = $(this).val(),
 				span = $('.span8').empty();
-		if (!/[0-9]/.test(val)) span.append(alertTemplate('alert-error', 'Not a numeric value. Fix it!'));
+		if (val !== '') {
+			if (/[^0-9+]$/.test(val)) span.append(alertTemplate('alert-error', 'Not a numeric value. Fix it!'));
+		}
 	});
 	
 });
