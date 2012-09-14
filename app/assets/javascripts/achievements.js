@@ -17,6 +17,11 @@ $(function () {
 			'Prova på': 0,
 			'Klarade på första försöket': 1,
 			'Klarade på fem försök': 5
+		},
+		'pasde': {
+			'Prova på': 0,
+			'Klarade på första försöket': 1,
+			'Klarade på fem försök': 5
 		}
 	};
 	
