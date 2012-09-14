@@ -46,6 +46,17 @@ class AchievementsController < ApplicationController
     else
       # You can access multi achievement value via "params[:achievement][:value]"
       # It maybe a string so you can do something like ".to_i" to convert to a integer.
+
+      value = params[:achievement][:value].to_s
+      # Get value from form, strip all spaces and chars and convert to integer
+      value = value.gsub(/[^0-9]+/, "")
+
+      raise ArgumentError.new("Value must be an integer") if value.blank?
+
+      value = value.to_i
+
+      
+
     end
         
     respond_to do |format|

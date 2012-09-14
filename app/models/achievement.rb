@@ -1,5 +1,5 @@
 class Achievement < ActiveRecord::Base
-  attr_accessible :is_single_point, :name, :point
+  attr_accessible :is_single_point, :name, :point, :uid
   has_many :achievement_points
 
   # Collect each achievements for team. Will get the higest point for for each achievements for each user.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914091112) do
+ActiveRecord::Schema.define(:version => 20120914101957) do
 
   create_table "achievement_points", :force => true do |t|
     t.integer  "user_id",        :null => false
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120914091112) do
     t.boolean  "is_single_point", :default => true
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+    t.string   "uid"
   end
 
   create_table "teams", :force => true do |t|
