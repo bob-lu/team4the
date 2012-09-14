@@ -19,6 +19,22 @@ class WorkoutController < ApplicationController
 		end
 	end
 	
+	def edit
+		@workout = Workout.find(params[:id])
+	end
+	
+	def update
+		@workout = Workout.find(params[:id])
+		
+		respond_to do |format|
+			if @workout.update_attributes(params[:workout])
+				format.html { redirect_to @workout, notice: 'Workout was successfully updated.' }
+			else
+				format.html { render action: "edit" }
+			end
+		end
+	end
+	
 	def show
 		@workout = Workout.find(params[:id])
 		
