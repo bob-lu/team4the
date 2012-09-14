@@ -73,17 +73,66 @@ class Achievement < ActiveRecord::Base
 
         create_or_update_point user, a_cindy_point
 
-      when "pasde"
-      when "heal"
+      when "pasde", "heal"
+        the_point = 1
+        value = value.to_i
+
+        the_point += 2 if value.eql?(1)
+        the_point += 1 if value.eql?(5)
+
+        create_or_update_point user, the_point
       when "jonglering"
-      when "hare"
+        value = value.to_i
+
+        juggle_point = 2 if value >= 25
+        juggle_point = 3 if value >= 50
+
+        create_or_update_point user, juggle_point
+      
+      when "hare", "koppla"
+        # Hare / Value = 1 (one leg), 2 (two legs)
+        # Koppla / Value = 1 (one way), 2 (two way)
+        value = value.to_i
+        
+        hare_point = 1 if value.eql?(1)
+        hare_point = 3 if value.eql?(2)
+
+        create_or_update_point user, hare_point
       when "tryout"
+        tryout_point = AchievementPoint.where(user_id: user.id, achievement_id: id).pluck(:point).first
+        tryout_point = 0 if tryout_point.nil?
+        tryout_point += 1
+        tryout_point = 20 if tryout_point > 20
+
+        create_or_update_point user, tryout_point
       when "hopprep"
-      when "koppla"
+        value = value.to_i
+
+        hopp_point = 2 if value >= 15
+        hopp_point += 2 if value >= 25
+
+        create_or_update_point user, hopp_point
       when "chins"
+        # Number of chins
+        value = value.to_i
+        chin_point = 1 if value > 0
+        sets = (value - 1) / 5
+        chin_point += (sets * 2) if sets > 0
+
+        create_or_update_point user, chin_point
+      when "rings"
+        value = value.to_i
+        ring_point = value / 5
+        create_or_update_point user, ring_point
       when "dans"
-      when "plankan"
-      when "luftstol"
+        # 0 = 1pt, 1-4 is number of "åttor" in a row.
+        value = value.to_i
+        value = 4 if value > 4
+        dance_point = 1 + (2 * value)
+        create_or_update_point user, dance_point
+      when "plankan", "luftstol"
+        # No points logged, only participation since placement is all that matters.
+        create_or_update_point user, 0
     end
   end
 
