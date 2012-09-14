@@ -4,13 +4,7 @@ $(function () {
 	 * Achievements list
 	 */
 	
-	var achivements = {
-		chins: {
-			'< 20': '4',
-			'~ 30': '5',
-			'> 30': '6'
-		}
-	};
+	var achivements = {};
 	
 	/**
 	 * Description template
@@ -29,7 +23,18 @@ $(function () {
 			
 	var actionsTemplate = [
 		'<div class="actions">',
-		'  <input type="submit" value="Save" />',
+		'  <input type="submit" value="Save" class="btn" />',
+		'</div>'
+	].join('\n');
+	 
+	/**
+	 * Textbox template
+	 */
+	 
+	var textBoxTemplate = [
+		'<div class="field">', 
+		'  <label>Value</label>',
+		'  <input type="text" name="achievement[value] id="achievement_value" />', 
 		'</div>'
 	].join('\n');
 	 
@@ -65,7 +70,7 @@ $(function () {
 	/**
 	 * Get team achievements direct when the page is loaded
 	 * and get the max point for each achivement.
-	 */
+	 *
 	
 	$.getJSON('/achievements.json', function (data) {
 		var i = 0
@@ -80,6 +85,7 @@ $(function () {
 		
 		window.max = max;
 	});
+	*/
 	
 	/**
 	 * Load right template and data on change event
@@ -90,25 +96,13 @@ $(function () {
 		if (id) {
 			var elm = $('input[data-id=' + id + ']')
 			  , single = elm.data('single')
-			  , name = elm.data('name')
-			  , ach = achivements[name];
-			
-			if (Object.keys(ach).length) {
-				if (single) {
-					$('#formTmpl').empty().append(dropDownTemplate(ach)).append(actionsTemplate);
-					if (max[name]) {
-						var message = 'Hey! <strong>{user}</strong> in your team alreday did this achievement and received <strong>{points}</strong> points!'
-													.replace('{user}', max[name].user)
-													.replace('{points}', max[name].points);
-													
-						$('.span8').html(alertTemplate('alert-success', message));
-					} else {
-						$('.span8').empty();
-					}
-				} else {
-					// multi achievement
-				}
+			  , name = elm.data('name');
+			  
+			var formTmpl = $('#formTmpl').empty();
+			if (!single) {
+				formTmpl.append(textBoxTemplate);
 			}
+			formTmpl.append(actionsTemplate);
 		} else {
 			$('#formTmpl, .span8').empty();
 		}
