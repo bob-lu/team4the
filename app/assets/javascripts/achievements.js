@@ -111,16 +111,19 @@ $(function () {
 			var elm = $('input[data-id=' + id + ']')
 			  , single = elm.data('single')
 			  , name = elm.data('name')
-			  , formTmpl = $('#formTmpl').empty()
 			  , ach;
-			    
+			  
 			if (achivements[name]) {
 				ach = achivements[name];
-				formTmpl.append(dropDownTemplate(ach));
-			} else if (!single) {
-				formTmpl.append(textBoxTemplate);	
 			}
-			
+			  
+			  
+			var formTmpl = $('#formTmpl').empty();
+			if (!single && !ach) {
+				formTmpl.append(textBoxTemplate);
+			} else if (ach) {
+				formTmpl.append(dropDownTemplate(ach));
+			}
 			formTmpl.append(actionsTemplate);
 		} else {
 			$('#formTmpl, .span8').empty();
