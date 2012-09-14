@@ -1,3 +1,14 @@
+function validate(evt) {
+	var theEvent = evt || window.event;
+	var key = theEvent.keyCode || theEvent.which;
+	key = String.fromCharCode(key);
+	var regex = /[0-9]|\./;
+	if(!regex.test(key)) {
+		theEvent.returnValue = false;
+		if(theEvent.preventDefault) theEvent.preventDefault();
+	}
+}
+
 $(function () {
 	
 	/**
@@ -34,7 +45,7 @@ $(function () {
 	var textBoxTemplate = [
 		'<div class="field">', 
 		'  <label>Value</label>',
-		'  <input type="text" name="achievement[value] id="achievement_value" />', 
+		'  <input type="text" name="achievement[value]" id="achievement_value" />', 
 		'</div>'
 	].join('\n');
 	 
@@ -106,6 +117,16 @@ $(function () {
 		} else {
 			$('#formTmpl, .span8').empty();
 		}
+	});
+	
+	/**
+	 * Show error if the field value isn't a numeric value
+	 */
+	 
+	$('body').on('keyup', '#achievement_value', function (e) {
+		var val = $(this).val(),
+				span = $('.span8').empty();
+		if (!/[0-9]/.test(val)) span.append(alertTemplate('alert-error', 'Not a numeric value. Fix it!'));
 	});
 	
 });
