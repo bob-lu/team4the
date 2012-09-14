@@ -18,5 +18,5 @@
 </div>
 
 <% @achievements.each do |a| %>
-  <%= hidden_field :"#{a.id}", :"#{a.name.downcase}", :"data-id" => a.id, :"data-single" => a.is_single_point, :"data-name" => a.name.downcase.underscore %>
+  <%= hidden_field :"#{a.id}", :"#{a.uid}", :"data-id" => a.id, :"data-single" => a.is_single_point, :"data-name" => a.uid %>
 <% end %>
