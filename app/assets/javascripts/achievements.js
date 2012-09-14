@@ -111,18 +111,12 @@ $(function () {
 			var elm = $('input[data-id=' + id + ']')
 			  , single = elm.data('single')
 			  , name = elm.data('name')
-			  , ach;
+			  , formTmpl = $('#formTmpl').empty();
 			  
 			if (achivements[name]) {
-				ach = achivements[name];
-			}
-			  
-			  
-			var formTmpl = $('#formTmpl').empty();
-			if (!single && !ach) {
-				formTmpl.append(textBoxTemplate);
-			} else if (ach) {
-				formTmpl.append(dropDownTemplate(ach));
+				formTmpl.append(dropDownTemplate(achivements[name]));
+			} else if (!single) {
+				formTmpl.append(textBoxTemplate);	
 			}
 			formTmpl.append(actionsTemplate);
 		} else {
