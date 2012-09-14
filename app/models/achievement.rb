@@ -24,4 +24,45 @@ class Achievement < ActiveRecord::Base
   def points(user)
     self.achievement_points.find_by_user(user)
   end
+
+  def calculate_and_save_point(user, value)
+    case uid
+      when "springa"
+        max_run = 90
+        value = value.to_i
+        diff = max_run - value
+        run_point = diff * 0.5
+        create_or_update_point user, run_point
+      when "simma"
+        
+      when "cindy"
+
+      when "a_cindy"
+      when "pasde"
+      when "heal"
+      when "jonglering"
+      when "hare"
+      when "tryout"
+      when "hopprep"
+      when "koppla"
+      when "chins"
+      when "dans"
+      when "plankan"
+      when "luftstol"
+    end
+  end
+
+  def create_or_update_point(user, points)
+    if point_exist? user
+      achievement_point = AchievementPoint.where(user_id: user.id, achievement_id: id).first
+      achievement_point.point = points
+      achievement_point.save
+    else
+      AchievementPoint.create(user_id: user.id, achievement_id: id, point: points)
+    end
+  end
+
+  def point_exist?(user)
+    AchievementPoint.where(user_id: user.id, achievement_id: id).count > 0
+  end
 end

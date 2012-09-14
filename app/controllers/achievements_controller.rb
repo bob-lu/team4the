@@ -42,29 +42,20 @@ class AchievementsController < ApplicationController
     achievement = Achievement.find(params[:achievement][:id])
     
     if achievement.is_single_point
-      achievementPoint = AchievementPoint.new({ point: achievement.point, user: current_user, achievement: achievement })
+      achievement.create_or_update_point current_user, achievement.point
     else
-      # You can access multi achievement value via "params[:achievement][:value]"
-      # It maybe a string so you can do something like ".to_i" to convert to a integer.
-
       value = params[:achievement][:value].to_s
-      # Get value from form, strip all spaces and chars and convert to integer
-      value = value.gsub(/[^0-9]+/, "")
+
+      # Get value from form, strip all spaces and chars (except dot)
+      value = value.gsub(/[^0-9\.]+/, "")
 
       raise ArgumentError.new("Value must be an integer") if value.blank?
-
-      value = value.to_i
-
       
-
+      achievement.calculate_and_save_point current_user, value
     end
         
     respond_to do |format|
-      if achievementPoint.save
-        format.html { redirect_to achievements_path, notice: 'Achievements was successfully saved.' }
-      else
-        format.html { redirect_to achievements_path, notice: error }
-      end
+      format.html { redirect_to achievements_path, notice: 'Achievements was successfully saved.' }
     end
   end
 
