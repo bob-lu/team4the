@@ -47,9 +47,8 @@ class Achievement < ActiveRecord::Base
         swim_diff = max_swim - time
         swim_point = swim_diff / 30
 
-        if swim_point > 0
-          create_or_update_point user, swim_point, user_val
-          
+        create_or_update_point user, swim_point, user_val
+        
       when "cindy"
         cindy_point = 5
         value = value.to_i
