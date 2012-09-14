@@ -23,7 +23,7 @@ class PageController < ApplicationController
 		@achievements = Array.new
 		points = AchievementPoint.where(:user_id => current_user.id)
 		points.each do |point|
-			@achievements.push({ point: point.point, ach: Achievement.find(point.achievement_id) })
+			@achievements.push({ point: point.point, ach: Achievement.find(point.achievement_id), user: current_user, aid: point.id })
 		end
 		
 		# Team achievements

@@ -82,11 +82,12 @@ class AchievementsController < ApplicationController
   # DELETE /achievements/1
   # DELETE /achievements/1.json
   def destroy
-    @achievement = Achievement.find(params[:id])
+    @achievement = AchievementPoint.find(params[:id])
+    return if not current_user == @achievement.user
     @achievement.destroy
 
     respond_to do |format|
-      format.html { redirect_to achievements_url }
+      format.html { redirect_to dashboard_path }
       format.json { head :no_content }
     end
   end

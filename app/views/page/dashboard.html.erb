@@ -11,6 +11,10 @@
 				|
 				<%= ach[:point] %>
 				<strong>Points</strong>
+				|
+				<% if ach[:user].id == current_user.id %>
+				<%= link_to 'x', achievement_path(ach[:aid]), method: :delete, data: { confirm: 'Are you sure?' } %>
+				<% end %>
 			</p>
 		<% end %>		
 		</div>
