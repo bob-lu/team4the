@@ -32,13 +32,24 @@ class Achievement < ActiveRecord::Base
       when "springa"
         max_run = 90
         value = value.to_i
-        diff = max_run - value
-        run_point = diff * 0.5
+        run_diff = max_run - value
+        run_point = run_diff * 0.5
         create_or_update_point user, run_point, user_val
 
       when "simma"
-        # TODO: Make calculation with float.
         # 1pt per 30 sec under 15 minutes
+        max_swim = 900
+        split_arr = value.split('.')
+        minutes = split_arr[0].to_i
+        seconds = split_arr[1].to_i
+
+        time = (minutes*60) + seconds
+        swim_diff = max_swim - time
+        swim_point = swim_diff / 30
+
+        if swim_point > 0
+          create_or_update_point user, swim_point, user_val
+          
       when "cindy"
         cindy_point = 5
         value = value.to_i
