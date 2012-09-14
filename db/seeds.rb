@@ -89,5 +89,7 @@ Achievement.create([
 											{ name: "Stå på händer 5 sekunder", point: 2 },
 											{ name: "Dans (Isotop-event)", is_single_point: false, point: 1 },
 											{ name: "Hoppa från 10an", point: 2 },
-											{ name: "Dyka från 5an", point: 2 }
+											{ name: "Dyka från 5an", point: 2 },
+											{ name: "Plankan (Isotop-event)", is_single_point: false },
+											{ name: "Luftstol (Isotop-event)", is_single_point: false }
 									])
