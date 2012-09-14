@@ -26,4 +26,12 @@ class WorkoutController < ApplicationController
 			format.html
 		end	
 	end
+	
+	def destroy
+		@workout = Workout.find(params[:id])
+		@workout.destroy
+		respond_to do |format|
+			format.html { redirect_to dashboard_path }
+		end
+	end
 end
