@@ -4,7 +4,26 @@ $(function () {
 	 * Achievements list
 	 */
 	
-	var achivements = {};
+	var achivements = {
+		'hare': {
+			'Ett ben': 1,
+			'Båda benen': 2
+		},
+		'koppla': {
+			'En sida': 1,
+			'Båda sidorna': 2
+		},
+		'heal': {
+			'Prova på': 0,
+			'Klarade på första försöket': 1,
+			'Klarade på fem försök': 5
+		},
+		'pasde': {
+			'Prova på': 0,
+			'Klarade på första försöket': 1,
+			'Klarade på fem försök': 5
+		}
+	};
 	
 	/**
 	 * Description template
@@ -96,11 +115,13 @@ $(function () {
 		if (id) {
 			var elm = $('input[data-id=' + id + ']')
 			  , single = elm.data('single')
-			  , name = elm.data('name');
+			  , name = elm.data('name')
+			  , formTmpl = $('#formTmpl').empty();
 			  
-			var formTmpl = $('#formTmpl').empty();
-			if (!single) {
-				formTmpl.append(textBoxTemplate);
+			if (achivements[name]) {
+				formTmpl.append(dropDownTemplate(achivements[name]));
+			} else if (!single) {
+				formTmpl.append(textBoxTemplate);	
 			}
 			formTmpl.append(actionsTemplate);
 		} else {
