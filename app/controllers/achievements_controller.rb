@@ -3,10 +3,10 @@ class AchievementsController < ApplicationController
   # GET /achievements.json
   def index
     @achievements = Achievement.all
-    team_achievements = Achievement.team_points(current_user.team)
+    #team_achievements = Achievement.team_points(current_user.team)
     respond_to do |format|
       format.html
-      format.json { render json: team_achievements }
+      #format.json { render json: team_achievements }
     end
   end
 
@@ -42,11 +42,11 @@ class AchievementsController < ApplicationController
     achievement = Achievement.find(params[:achievement][:id])
     
     if achievement.is_single_point
-      achievementPoint = AchievementPoint.create({ point: params[:achievement][:value], user: current_user, achievement: achievement })
+      achievementPoint = AchievementPoint.new({ point: achievement.point, user: current_user, achievement: achievement })
     end
     
     respond_to do |format|
-      if true
+      if achievementPoint.save
         format.html { redirect_to achievements_path, notice: 'Achievements was successfully saved.' }
       else
         format.html { redirect_to achievements_path, notice: error }
