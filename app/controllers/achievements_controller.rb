@@ -39,23 +39,27 @@ class AchievementsController < ApplicationController
 
   # POST /achievements
   def create
-    achievement = Achievement.find(params[:achievement][:id])
-    
-    if achievement.is_single_point
-      achievement.create_or_update_point current_user, achievement.point
-    else
-      value = params[:achievement][:value].to_s
-
-      # Get value from form, strip all spaces and chars (except dot)
-      value = value.gsub(/[^0-9\.]+/, "")
-
-      raise ArgumentError.new("Value must be an integer") if value.blank?
+    begin
+      achievement = Achievement.find(params[:achievement][:id])
       
-      achievement.calculate_and_save_point current_user, value
-    end
+      if achievement.is_single_point
+        achievement.create_or_update_point current_user, achievement.point
+      else
+        value = params[:achievement][:value].to_s
+
+        # Get value from form, strip all spaces and chars (except dot)
+        value = value.gsub(/[^0-9\.]+/, "")
+
+        raise ArgumentError.new("Value must be an integer") if value.blank?
         
-    respond_to do |format|
-      format.html { redirect_to achievements_path, notice: 'Achievements was successfully saved.' }
+        achievement.calculate_and_save_point current_user, value
+      end
+          
+      respond_to do |format|
+        format.html { redirect_to achievements_path, notice: 'Achievements was successfully saved.' }
+      end
+    rescue ArgumentError => ex
+      redirect_to achievements_path, :flash => { :error => ex.message }
     end
   end
 

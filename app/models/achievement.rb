@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 class Achievement < ActiveRecord::Base
   attr_accessible :is_single_point, :name, :point, :uid
   has_many :achievement_points
@@ -34,6 +37,7 @@ class Achievement < ActiveRecord::Base
         value = value.to_i
         run_diff = max_run - value
         run_point = run_diff * 0.5
+
         create_or_update_point user, run_point, user_val
 
       when "simma"
@@ -149,6 +153,10 @@ class Achievement < ActiveRecord::Base
   end
 
   def create_or_update_point(user, points, user_val = "")
+    if points.nil?
+      raise ArgumentError.new("Ogiltigt värde för achievement.")
+    end
+
     if point_exist? user
       achievement_point = AchievementPoint.where(user_id: user.id, achievement_id: id).first
       achievement_point.point = points

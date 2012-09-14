@@ -1,15 +1,8 @@
-<% if notice %>
-  <div class="alert alert-success">
-    <a href="#" class="close" data-dismiss="alert">x</a>
-    <%= notice %>
-  </div>
-<% end %>
-
 <h3>Achievement</h3>
 <div class="row">
   <%= form_for(:achievement, :url => achievements_path) do |f| %>
     <div class="span4">
-      <%= collection_select(:achievement, :id, @achievements, :id, :name, {:prompt => true}) %>
+      <%= collection_select(:achievement, :id, @achievements.sort_by{|a|a.name}, :id, :name, {:prompt => true}) %>
       <div id="formTmpl"></div>
     </div>
     <div class="span8">

@@ -48,6 +48,13 @@
     </div>
 
     <div class="container">
+      <%- flash.each do |name, msg| -%>
+          <div class="<%= get_flash_class name %>">
+            <a href="#" class="close" data-dismiss="alert">x</a>
+            <%=raw msg %>
+          </div>
+      <%- end -%>
+      
   		<%= yield %>
   	</div>
   </body>
