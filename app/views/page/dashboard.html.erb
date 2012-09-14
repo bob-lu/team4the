@@ -3,12 +3,22 @@
 
 	</div>
 	<div class="span4">
-		<h2>Completed workouts</h2>
+		<h3>Your completed workouts</h3>
 		<% @workouts.each do |workout| %>
 			<p>
 				<%= workout.description %>
 				-
 				<%= link_to workout.workout_date, workout %>
+			</p>
+		<% end -%>
+		<h3>Completed workouts in your team</h3>
+		<% @team_workouts.each do |workout| %>
+			<p>
+				<%= workout.description %>
+				-
+				<%= link_to workout.workout_date, workout %>
+				by
+				<%= link_to workout.user.username, workout.user %>
 			</p>
 		<% end -%>
 	</div>
