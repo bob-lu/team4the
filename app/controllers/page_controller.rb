@@ -10,6 +10,9 @@ class PageController < ApplicationController
 		# Current users own workouts
 		@workouts = Workout.where(:user_id => current_user.id).order(:workout_date).reverse_order
 		
+		# All teams
+		@teams = Team.all.to_a
+
 		# Team workouts
 		@team_workouts = Array.new
 		current_user.team.users.each do |user|

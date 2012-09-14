@@ -1,5 +1,18 @@
 <div class="row">
 	<div class="span4">
+		<h3>Tabell</h3>
+		<h4>Achievementpoäng</h4>
+		<ol>
+			<% @teams.sort_by{|team| [team.achievement_points, team.name]}.reverse.each do |team|%>
+			<li><%= team.name -%> (<%= team.achievement_points -%> poäng)</li>
+			<% end -%>
+		</ol>
+		<h4>Antal träningstillfällen</h4>
+		<ol>
+		<% @teams.sort_by{|team| [team.workouts, team.name] }.reverse.each do |team|%>
+			<li><%= team.name -%> (<%= team.workouts -%> tillfällen)</li>
+		<% end -%>
+		</ol>
 	</div>
 	<div class="span4">
 		<h4>Your completed achievements</h4>
