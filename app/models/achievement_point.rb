@@ -1,5 +1,5 @@
 class AchievementPoint < ActiveRecord::Base
-  attr_accessible :point, :user, :achievement, :placement, :user_id, :achievement_id
+  attr_accessible :point, :user, :achievement, :placement, :user_id, :achievement_id, :description, :user_value
   belongs_to :user
   belongs_to :achievement
   
