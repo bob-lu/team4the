@@ -1,6 +1,31 @@
 <div class="row">
-	<div class="span8">
-
+	<div class="span4">
+	</div>
+	<div class="span4">
+		<h3>Your achievements</h3>
+		<% @achievements.each do |ach| %>
+			<p>
+				<strong>Achievement</strong>
+				<%= ach[:ach].name %>
+				|
+				<%= ach[:point] %>
+				<strong>Points</strong>
+			</p>
+		<% end %>
+		
+		<h3>Completed achievements in your team</h3>
+		<% @team_achievements.each do |ach| %>
+			<p>
+				<strong>Achievement</strong>
+				<%= ach[:ach].name %>
+				|
+				<%= ach[:point] %>
+				<strong>Points</strong>
+				|
+				by
+				<%= link_to ach[:user].username, user_path(ach[:user]) %>
+			</p>
+		<% end %>
 	</div>
 	<div class="span4">
 		<h3>Your completed workouts</h3>
