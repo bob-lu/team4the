@@ -26,13 +26,15 @@ class Achievement < ActiveRecord::Base
   end
 
   def calculate_and_save_point(user, value)
+    user_val = value
+
     case uid
       when "springa"
         max_run = 90
         value = value.to_i
         diff = max_run - value
         run_point = diff * 0.5
-        create_or_update_point user, run_point
+        create_or_update_point user, run_point, user_val
 
       when "simma"
         # TODO: Make calculation with float.
@@ -53,7 +55,7 @@ class Achievement < ActiveRecord::Base
           cindy_point += 3
         end
 
-        create_or_update_point user, cindy_point
+        create_or_update_point user, cindy_point, user_val
 
       when "a_cindy"
         a_cindy_point = 3
@@ -71,7 +73,7 @@ class Achievement < ActiveRecord::Base
           a_cindy_point += 1
         end
 
-        create_or_update_point user, a_cindy_point
+        create_or_update_point user, a_cindy_point, user_val
 
       when "pasde", "heal"
         the_point = 1
@@ -80,14 +82,14 @@ class Achievement < ActiveRecord::Base
         the_point += 2 if value.eql?(1)
         the_point += 1 if value.eql?(5)
 
-        create_or_update_point user, the_point
+        create_or_update_point user, the_point, user_val
       when "jonglering"
         value = value.to_i
 
         juggle_point = 2 if value >= 25
         juggle_point = 3 if value >= 50
 
-        create_or_update_point user, juggle_point
+        create_or_update_point user, juggle_point, user_val
       
       when "hare", "koppla"
         # Hare / Value = 1 (one leg), 2 (two legs)
@@ -97,21 +99,21 @@ class Achievement < ActiveRecord::Base
         hare_point = 1 if value.eql?(1)
         hare_point = 3 if value.eql?(2)
 
-        create_or_update_point user, hare_point
+        create_or_update_point user, hare_point, user_val
       when "tryout"
         tryout_point = AchievementPoint.where(user_id: user.id, achievement_id: id).pluck(:point).first
         tryout_point = 0 if tryout_point.nil?
         tryout_point += 1
         tryout_point = 20 if tryout_point > 20
 
-        create_or_update_point user, tryout_point
+        create_or_update_point user, tryout_point, user_val
       when "hopprep"
         value = value.to_i
 
         hopp_point = 2 if value >= 15
         hopp_point += 2 if value >= 25
 
-        create_or_update_point user, hopp_point
+        create_or_update_point user, hopp_point, user_val
       when "chins"
         # Number of chins
         value = value.to_i
@@ -119,30 +121,31 @@ class Achievement < ActiveRecord::Base
         sets = (value - 1) / 5
         chin_point += (sets * 2) if sets > 0
 
-        create_or_update_point user, chin_point
+        create_or_update_point user, chin_point, user_val
       when "rings"
         value = value.to_i
         ring_point = value / 5
-        create_or_update_point user, ring_point
+        create_or_update_point user, ring_point, user_val
       when "dans"
         # 0 = 1pt, 1-4 is number of "åttor" in a row.
         value = value.to_i
         value = 4 if value > 4
         dance_point = 1 + (2 * value)
-        create_or_update_point user, dance_point
+        create_or_update_point user, dance_point, user_val
       when "plankan", "luftstol"
         # No points logged, only participation since placement is all that matters.
         create_or_update_point user, 0
     end
   end
 
-  def create_or_update_point(user, points)
+  def create_or_update_point(user, points, user_val = "")
     if point_exist? user
       achievement_point = AchievementPoint.where(user_id: user.id, achievement_id: id).first
       achievement_point.point = points
+      achievement_point.user_value = user_val
       achievement_point.save
     else
-      AchievementPoint.create(user_id: user.id, achievement_id: id, point: points)
+      AchievementPoint.create(user_id: user.id, achievement_id: id, point: points, user_value: user_val)
     end
   end
 
