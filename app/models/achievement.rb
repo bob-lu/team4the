@@ -33,11 +33,46 @@ class Achievement < ActiveRecord::Base
         diff = max_run - value
         run_point = diff * 0.5
         create_or_update_point user, run_point
+
       when "simma"
-        
+        # TODO: Make calculation with float.
+        # 1pt per 30 sec under 15 minutes
       when "cindy"
+        cindy_point = 5
+        value = value.to_i
+
+        if value < 10
+          cindy_point += 15
+        elsif value < 15
+          cindy_point += 12
+        elsif value < 20
+          cindy_point += 9
+        elsif value < 25
+          cindy_point += 6
+        elsif value < 30
+          cindy_point += 3
+        end
+
+        create_or_update_point user, cindy_point
 
       when "a_cindy"
+        a_cindy_point = 3
+        value = value.to_i
+
+        if value < 10
+          a_cindy_point += 8
+        elsif value < 15
+          a_cindy_point += 6
+        elsif value < 20
+          a_cindy_point += 4
+        elsif value < 25
+          a_cindy_point += 2
+        elsif value < 30
+          a_cindy_point += 1
+        end
+
+        create_or_update_point user, a_cindy_point
+
       when "pasde"
       when "heal"
       when "jonglering"
