@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907120639) do
+ActiveRecord::Schema.define(:version => 20120914091112) do
 
   create_table "achievement_points", :force => true do |t|
     t.integer  "user_id",        :null => false
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20120907120639) do
     t.string   "description"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "placement"
   end
 
   create_table "achievements", :force => true do |t|

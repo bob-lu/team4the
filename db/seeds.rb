@@ -1,3 +1,5 @@
+#!/bin/env ruby
+# encoding: utf-8
 
 team1 = Team.create(name: "Team 1")
 team2 = Team.create(name: "Team 2")
@@ -65,3 +67,27 @@ team6_users = User.create([
 													])
 
 team6.users = team6_users
+
+Achievement.create([
+											{ name: "Springa 1 mil (Isotop-event)", is_single_point: false },
+											{ name: "Simma 400 meter", is_single_point: false },
+											{ name: "Cykla 5 mil", point: 6 },
+											{ name: "Simma 400 meter", is_single_point: false },
+											{ name: "Cindy", is_single_point: false, point: 5 },
+											{ name: "Alternativ Cindy", is_single_point: false, point: 3 },
+											{ name: "Pas de Bourrée (Isotop-event)", is_single_point: false, point: 1 },
+											{ name: "Hälkick & högt knä (Isotop-event)", is_single_point: false, point: 1 },
+											{ name: "Jonglering med 3 bollar", is_single_point: false },
+											{ name: "Skjuta hare - höger & vänster", is_single_point: false },
+											{ name: "Muscle up", point: 6 },
+											{ name: "Prova på en sport", is_single_point: false, point: 1 },
+											{ name: "Hoppa hopprep, double unders", is_single_point: false },
+											{ name: "Koppla händer", is_single_point: false },
+											{ name: "Axelrotation", point: 1 },
+											{ name: "Sittande press med rundstav", point: 4 },
+											{ name: "Chins/Ringar", is_single_point: false },
+											{ name: "Stå på händer 5 sekunder", point: 2 },
+											{ name: "Dans (Isotop-event)", is_single_point: false, point: 1 },
+											{ name: "Hoppa från 10an", point: 2 },
+											{ name: "Dyka från 5an", point: 2 }
+									])
