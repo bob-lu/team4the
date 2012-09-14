@@ -25,6 +25,10 @@ gem 'jquery-rails'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
+if HOST_OS =~ /linux/i
+  gem 'therubyracer', '>= 0.9.8'
+end
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
