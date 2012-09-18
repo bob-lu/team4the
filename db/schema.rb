@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914140003) do
+ActiveRecord::Schema.define(:version => 20120918135235) do
 
   create_table "achievement_points", :force => true do |t|
     t.integer  "user_id",        :null => false
@@ -35,8 +35,9 @@ ActiveRecord::Schema.define(:version => 20120914140003) do
 
   create_table "teams", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.float    "total_distance"
   end
 
   create_table "users", :force => true do |t|

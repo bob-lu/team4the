@@ -1,5 +1,5 @@
 class Team < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :total_distance
   has_many :users
 
   def workouts
@@ -16,9 +16,5 @@ class Team < ActiveRecord::Base
   		total_points += user.achievement_points.sum("point")
   	end
   	total_points
-  end
-
-  def total_distance
-  	# TODO: Calculation of dizzzztance.
   end
 end
