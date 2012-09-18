@@ -31,7 +31,7 @@ $(function () {
 	
 	var descriptionTemplate = [
 		'<div class="field">',
-		'  <label class="bold">Description</label>',
+		'  <label class="bold">Beskrivning</label>',
 	  '  <input type="text" name="archievement[description]" />',
 		'</div>'
 	].join('\n');
@@ -42,7 +42,7 @@ $(function () {
 			
 	var actionsTemplate = [
 		'<div class="actions">',
-		'  <input type="submit" value="Save" class="btn" />',
+		'  <input type="submit" value="Spara" class="btn" />',
 		'</div>'
 	].join('\n');
 	 
@@ -52,7 +52,7 @@ $(function () {
 	 
 	var textBoxTemplate = [
 		'<div class="field">', 
-		'  <label>Value</label>',
+		'  <label>Värde</label>',
 		'  <input type="text" name="achievement[value]" id="achievement_value" />', 
 		'</div>'
 	].join('\n');
@@ -65,7 +65,7 @@ $(function () {
 	 */
 	
 	function dropDownTemplate(data) {
-		var tmpl = ['<div class="field">', '<select id="achievement_value" name="achievement[value]">', '<option>Please select</option>'];
+		var tmpl = ['<div class="field">', '<select id="achievement_value" name="achievement[value]">', '<option>Välj...</option>'];
 		for (var key in data)	tmpl.push('<option value="' + data[key] + '">' + key + '</option>');
 		tmpl.push('</select></div>');
 		return tmpl.join('\n');
@@ -103,6 +103,7 @@ $(function () {
 			} else if (!single) {
 				formTmpl.append(textBoxTemplate);	
 			}
+			//formTmpl.append(descriptionTemplate);
 			formTmpl.append(actionsTemplate);
 		} else {
 			$('#formTmpl, .span8').empty();
