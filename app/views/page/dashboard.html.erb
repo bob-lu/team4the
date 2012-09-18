@@ -1,10 +1,13 @@
 <div class="row">
 	<div class="span4">
-		<h3>Tabell</h3>
-		<h4>Achievementpoäng</h4>
+		<h3>Tabell för lagen</h3>
+		<h4>Antal loggade kilometer</h4>
+		<div class="alert alert-info">
+			<i class="icon-info-sign"></i> Uppdateras en gång i timmen!
+		</div>
 		<ol>
-			<% @teams.sort_by{|team| [team.achievement_points, team.name]}.reverse.each do |team|%>
-			<li><%= team.name -%> (<%= team.achievement_points -%> poäng)</li>
+			<% @teams.sort_by{|team| [team.total_distance, team.name] }.reverse.each do |team| %>
+				<li><%= team.name -%> (<%= "%.1f" % team.total_distance -%> km)</li>
 			<% end -%>
 		</ol>
 		<h4>Antal träningstillfällen</h4>
@@ -13,20 +16,26 @@
 			<li><%= team.name -%> (<%= team.workouts -%> tillfällen)</li>
 		<% end -%>
 		</ol>
+		<h4>Achievementspoäng</h4>
+		<ol>
+			<% @teams.sort_by{|team| [team.achievement_points, team.name]}.reverse.each do |team|%>
+			<li><%= team.name -%> (<%= team.achievement_points -%> poäng)</li>
+			<% end -%>
+		</ol>
 	</div>
 	<div class="span4">
+		<h3>Achievements</h3>
 		<h4>Dina avklarade achievements</h4>
 		<div class="list">
 		<% @achievements.each do |ach| %>
 			<p>
-				<strong>Achievement</strong>
+				<strong>Achievement</strong><br/>
 				<%= ach[:ach].name %>
 				|
-				<%= ach[:point] %>
-				<strong>Points</strong>
+				<strong><%= ach[:point] %></strong> poäng
 				|
 				<% if ach[:user].id == current_user.id %>
-				<%= link_to 'x', achievement_path(ach[:aid]), method: :delete, data: { confirm: 'Are you sure?' } %>
+				<%= link_to 'Radera', achievement_path(ach[:aid]), method: :delete, data: { confirm: 'Are you sure?' } %>
 				<% end %>
 			</p>
 		<% end %>		
@@ -40,17 +49,17 @@
 				<br />
 				<%= ach[:ach].name %>
 				|
-				<%= ach[:point] %>
-				<strong>Points</strong>
+				<strong><%= ach[:point] %></strong> poäng
 				|
-				by
+				av
 				<%= link_to ach[:user].username, user_path(ach[:user]) %>
 			</p>
 		<% end %>
 		</div>
 	</div>
 	<div class="span4">
-		<h4>Dina avklarade workouts</h4>
+		<h3>Träningstillfällen</h3>
+		<h4>Dina träningstillfällen</h4>
 		<div class="list">
 		<% @workouts.each do |workout| %>
 			<p>
@@ -61,7 +70,7 @@
 		<% end %>
 		</div>
 		
-		<h4>Avklarade workouts i ditt team</h4>
+		<h4>Träningstillfällen i ditt team</h4>
 		<div class="list">
 		<% @team_workouts.each do |workout| %>
 			<p>
