@@ -5,7 +5,7 @@ task :sync_nike_plus  => :environment do
   puts "Running sync of data from Nike+ at " + Time.now.to_s
   
   teams = Team.all
-  competition_start_time = Time.new("2012-09-12T15:00:00+02:00").utc
+  competition_start_time = Time.parse("2012-09-12T15:00:00+02:00").utc
 
   teams.each do |team|
   	total_distance = 0.0
@@ -18,7 +18,7 @@ task :sync_nike_plus  => :environment do
 	  			activities = user.nike.activities! # Use bang to disable cache.
 	  			activities.each do |activity|
             if activity.start_time_utc.utc > competition_start_time && activity.metrics.distance > 0.9
-	  				  total_distance += activity.metrics.distance 
+              total_distance += activity.metrics.distance 
             end
 	  			end
 	  		rescue RuntimeError => ex
