@@ -18,6 +18,3 @@ pickle-email-*.html
 # Sublime
 *.sublime-project
 *.sublime-workspace
-
-# Ignoring database.yml
-database.yml
