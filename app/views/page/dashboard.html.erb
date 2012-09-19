@@ -70,7 +70,7 @@
 				<strong><%= ach[:point] %></strong> poäng
 				|
 				av
-				<%= link_to ach[:user].username, user_path(ach[:user]) %>
+				<%= ach[:user].username -%>
 			</p>
 		<% end %>
 		</div>
@@ -95,8 +95,8 @@
 				<%= workout.description %>
 				-
 				<%= link_to workout.workout_date, workout %>
-				by
-				<%= link_to workout.user.username, workout.user %>
+				av
+				<%= workout.user.username -%>
 			</p>
 		<% end %>
 		</div>
