@@ -22,7 +22,25 @@ $(function () {
 			'Prova på': 0,
 			'Klarade på första försöket': 1,
 			'Klarade på fem försök': 5
+		},
+		'dans': {
+			"Genomförde momentet": 0,
+			"En åtta": 1,
+			"Två åttor": 2,
+			"Tre åttor": 3,
+			"Fyra åttor": 4
 		}
+	};
+
+	var messages = {
+		"springa": "Skriv in din tid i minuter",
+		"simma": "Skriv in din tid i formatet minut.sekunder (ex. 10.39)",
+		"cindy": "Skriv in din totala tid i minuter",
+		"a_cindy": "Skriv in din totala tid i minuter",
+		"jonglering": "Hur många varv klarade du?",
+		"hopprep": "Hur många varv klarade du?",
+		"chins": "Hur många chins klarade du?",
+		"rings": "Hur många klarade du?"
 	};
 	
 	/**
@@ -97,7 +115,13 @@ $(function () {
 			  , single = elm.data('single')
 			  , name = elm.data('name')
 			  , formTmpl = $('#formTmpl').empty();
-			  
+			
+			if(messages[name]) {
+				var $msg = $('<div class="alert alert-info"></div>');
+				$msg.text(messages[name]);
+				formTmpl.append($msg);
+			}
+
 			if (achivements[name]) {
 				formTmpl.append(dropDownTemplate(achivements[name]));
 			} else if (!single) {
