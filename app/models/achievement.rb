@@ -36,6 +36,7 @@ class Achievement < ActiveRecord::Base
         max_run = 90
         value = value.to_i
         run_diff = max_run - value
+        run_diff = 0 if run_diff < 0
         run_point = run_diff * 0.5
 
         create_or_update_point user, run_point, user_val
@@ -50,6 +51,7 @@ class Achievement < ActiveRecord::Base
 
         time = (minutes*60) + seconds
         swim_diff = max_swim - time
+        swim_diff = 0 if swim_diff < 0
         swim_point = swim_diff / 30
 
         create_or_update_point user, swim_point, user_val

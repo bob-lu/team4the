@@ -125,7 +125,13 @@ $(function () {
 			if (achivements[name]) {
 				formTmpl.append(dropDownTemplate(achivements[name]));
 			} else if (!single) {
-				formTmpl.append(textBoxTemplate);	
+				if(name != "tryout" && name != "luftstol" && name != "plankan")
+					formTmpl.append(textBoxTemplate);	
+				else
+				{
+					var input = '<input type="hidden" name="achievement[value]" id="achievement_value" value="0" />';
+					formTmpl.append(input);
+				}
 			}
 			//formTmpl.append(descriptionTemplate);
 			formTmpl.append(actionsTemplate);

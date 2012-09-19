@@ -47,8 +47,8 @@ class AchievementsController < ApplicationController
       else
         value = params[:achievement][:value].to_s
 
-        # Get value from form, strip all spaces and chars (except dot)
-        value = value.gsub(/[^0-9\.]+/, "")
+        # Get value from form, strip all spaces and chars (except dot and comma)
+        value = value.gsub(/[^0-9\.,]+/, "")
 
         raise ArgumentError.new("Value must be an integer") if value.blank?
         
