@@ -43,6 +43,7 @@ class Achievement < ActiveRecord::Base
       when "simma"
         # 1pt per 30 sec under 15 minutes
         max_swim = 900
+        value = value.gsub(",", ".")
         split_arr = value.split('.')
         minutes = split_arr[0].to_i
         seconds = split_arr[1].to_i
