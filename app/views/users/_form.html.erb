@@ -12,22 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, "Lösenord" %>
     <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation, "Bekräfta lösenord" %>
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="field">
-    <%= f.label :nike_id %>
+    <%= f.label :nike_id, "Nike+ ID (mailen du reggat dig med)" %>
     <%= f.text_field :nike_id %>
   </div>
   <div class="alert alert-warning">
     <strong>OBS! Ditt Nike+ lösenord måste skrivas in varje gång du uppdaterar denna sida!</strong>
   </div>
   <div class="field">
-    <%= f.label :nike_password %>
+    <%= f.label :nike_password, "Nike+ lösenord" %>
     <%= f.password_field :nike_password %>
   </div>
   <div class="actions">
