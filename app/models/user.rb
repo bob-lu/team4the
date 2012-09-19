@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
     nike_connection
     @c
   end
+
+  def total_achievement_points
+    achievement_points.sum("point")
+  end
   
   private
   

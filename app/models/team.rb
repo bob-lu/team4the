@@ -33,7 +33,7 @@ class Team < ActiveRecord::Base
   def achievement_points
   	total_points = 0.0
   	users.each do |user|
-  		total_points += user.achievement_points.sum("point")
+  		total_points += user.total_achievement_points
   	end
   	total_points
   end
