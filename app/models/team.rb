@@ -2,6 +2,18 @@ class Team < ActiveRecord::Base
   attr_accessible :name, :total_distance
   has_many :users
 
+  def average_distance
+    total_distance / users.count
+  end
+
+  def average_workouts
+    workouts.to_f / users.count
+  end
+
+  def average_achievement_points
+    achievement_points.to_f / users.count
+  end
+
   def workouts
   	total_workouts = 0
   	users.each do |user|

@@ -6,20 +6,32 @@
 			<i class="icon-info-sign"></i> Uppdateras en gång i timmen!
 		</div>
 		<ol>
-			<% @teams.sort_by{|team| [team.total_distance, team.name] }.reverse.each do |team| %>
-				<li><abbr title="<%= team.users.map{|u|u.username}.join(", ") -%>"><%= team.name -%></abbr> (<%= "%.1f" % team.total_distance -%> km)</li>
+			<% @teams.sort_by{|team| [team.average_distance, team.name] }.reverse.each do |team| %>
+				<li>
+					<abbr title="<%= team.users.map{|u|u.username}.join(", ") -%>"><%= team.name -%></abbr> 
+					(<strong>Snitt:</strong> <%= "%.2f" % team.average_distance -%> km 
+					/ <strong>Totalt:</strong> <%= "%.1f" % team.total_distance -%> km)
+				</li>
 			<% end -%>
 		</ol>
 		<h4>Antal träningstillfällen</h4>
 		<ol>
-		<% @teams.sort_by{|team| [team.workouts, team.name] }.reverse.each do |team|%>
-			<li><abbr title="<%= team.users.map{|u|u.username}.join(", ") -%>"><%= team.name -%></abbr> (<%= team.workouts -%> tillfällen)</li>
+		<% @teams.sort_by{|team| [team.average_workouts, team.name] }.reverse.each do |team|%>
+			<li>
+				<abbr title="<%= team.users.map{|u|u.username}.join(", ") -%>"><%= team.name -%></abbr> 
+				(<strong>Snitt:</strong> <%= "%.2f" % team.average_workouts -%> 
+				/ <strong>Totalt:</strong> <%= team.workouts -%> tillfällen)
+			</li>
 		<% end -%>
 		</ol>
 		<h4>Achievementspoäng</h4>
 		<ol>
-			<% @teams.sort_by{|team| [team.achievement_points, team.name]}.reverse.each do |team|%>
-			<li><abbr title="<%= team.users.map{|u|u.username}.join(", ") -%>"><%= team.name -%></abbr> (<%= team.achievement_points -%> poäng)</li>
+			<% @teams.sort_by{|team| [team.average_achievement_points, team.name]}.reverse.each do |team|%>
+			<li>
+				<abbr title="<%= team.users.map{|u|u.username}.join(", ") -%>"><%= team.name -%></abbr> 
+				(<strong>Snitt:</strong> <%= "%.2f" % team.average_achievement_points -%> 
+				/ <strong>Totalt:</strong> <%= team.achievement_points -%> poäng)
+			</li>
 			<% end -%>
 		</ol>
 	</div>
