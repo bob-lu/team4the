@@ -38,4 +38,8 @@ class PageController < ApplicationController
 			end
 		end
 	end
+
+	def ego_table
+		@users = User.all.to_a
+	end
 end

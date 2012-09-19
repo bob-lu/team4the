@@ -1,0 +1,68 @@
+<div class="row">
+	<div class="span4">
+		<h4>Antal loggade kilometer</h4>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Användare</th>
+					<th>Km</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.sort_by {|u| [u.total_distance, u.username]}.reverse.each_with_index do |user, i| %>
+					<tr>
+						<td><%= i + 1 -%></td>
+						<td><%= user.username -%></td>
+						<td><%= "%.2f" % user.total_distance -%></td>
+					</tr>	
+				<% end -%>
+			</tbody>
+		</table>
+		<div class="alert alert-info">
+			OBS! Uppdateras en gång per timme
+		</div>
+	</div>
+	<div class="span4">
+		<h4>Antal träningstillfällen</h4>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Användare</th>
+					<th>Antal</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.sort_by {|u| [u.workouts.count, u.username]}.reverse.each_with_index do |user, i| %>
+					<tr>
+						<td><%= i + 1 -%></td>
+						<td><%= user.username -%></td>
+						<td><%= user.workouts.count -%> st</td>
+					</tr>	
+				<% end -%>
+			</tbody>
+		</table>
+	</div>
+	<div class="span4">
+		<h4>Antal achievementspoäng</h4>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Användare</th>
+					<th>Poäng</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.sort_by {|u| [u.achievement_points.sum("point"), u.username]}.reverse.each_with_index do |user, i| %>
+					<tr>
+						<td><%= i + 1 -%></td>
+						<td><%= user.username -%></td>
+						<td><%= user.achievement_points.sum("point") -%>p</td>
+					</tr>	
+				<% end -%>
+			</tbody>
+		</table>
+	</div>
+</div>
