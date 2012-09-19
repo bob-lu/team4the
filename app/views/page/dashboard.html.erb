@@ -8,7 +8,7 @@
 		<ol>
 			<% @teams.sort_by{|team| [team.average_distance, team.name] }.reverse.each do |team| %>
 				<li>
-					<a href="#" rel="tooltip" data-original-title="<%= team.users.map{|u| u.username + " (" + ("%.1f" % u.total_distance).to_s + " km)"  }.join("<br/>") -%>"><%= team.name -%></a> - 
+					<a href="<%= url_for team_path team -%>" rel="tooltip" data-original-title="<%= team.users.map{|u| u.username + " (" + ("%.1f" % u.total_distance).to_s + " km)"  }.join("<br/>") -%>"><%= team.name -%></a> - 
 					<strong>Snitt:</strong> <%= "%.2f" % team.average_distance -%> km 
 					/ <strong>Totalt:</strong> <%= "%.1f" % team.total_distance -%> km
 				</li>

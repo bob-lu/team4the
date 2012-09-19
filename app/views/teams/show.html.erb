@@ -1,10 +1,82 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+	<div class="span12">
+		<h1><%= @team.name -%></h1>
+		<strong>Team members:</strong> <%= @team.users.map{|u|u.username}.join(", ") -%>
+	</div>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @team.name %>
-</p>
-
-
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+<div class="row">
+	<div class="span3">
+		<h4>Loggade kilometer</h4>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Användare</th>
+					<th>Km</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @team.users.to_a.sort_by{|u|u.total_distance}.reverse.each_with_index do |user, i| %>
+					<tr>
+						<td><%= i + 1 -%></td>
+						<td><%= user.username -%></td>
+						<td><%= "%.2f" % user.total_distance -%></td>
+					</tr>	
+				<% end -%>
+			</tbody>
+		</table>
+	</div>
+	<div class="span3">
+		<h4>Antal träningstillfällen</h4>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Användare</th>
+					<th>Antal</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @team.users.to_a.sort_by{|u|u.workouts.count}.reverse.each_with_index do |user, i| %>
+					<tr>
+						<td><%= i + 1 -%></td>
+						<td><%= user.username -%></td>
+						<td><%= user.workouts.count -%></td>
+					</tr>	
+				<% end -%>
+			</tbody>
+		</table>
+	</div>
+	<div class="span6">
+		<h4>Achievements</h4>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Användare</th>
+					<th>Poäng</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @team.users.to_a.sort_by{|u|u.achievement_points.sum("point")}.reverse.each_with_index do |user, i| %>
+					<tr>
+						<td><%= i + 1 -%></td>
+						<td><%= user.username -%></td>
+						<td>
+							<%= user.achievement_points.sum("point") -%>p<br/>
+							<strong>Specifikation</strong>
+							<ul>
+							<% user.achievement_points.each do |point| %>
+								<li>
+									<%= point.achievement.name -%> (<%= "%.1f" % point.point -%>p)
+								</li>
+							<% end -%>
+							</ul>
+						</td>
+					</tr>	
+				<% end -%>
+			</tbody>
+		</table>
+	</div>
+</div>

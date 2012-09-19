@@ -11,5 +11,5 @@ Team4the::Application.routes.draw do
   match '/logout', :to => 'session#destroy'
   get "/dashboard" => "page#dashboard"
   get "/ego-table" => "page#ego_table", :as => :ego_table
-  get '/team' => 'teams#index'
+  get "/team/:id" => "teams#show", :as => :team
 end
