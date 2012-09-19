@@ -8,10 +8,9 @@ task :sync_nike_plus  => :environment do
   competition_start_time = Time.parse("2012-09-12T15:00:00+02:00").utc
 
   teams.each do |team|
-  	total_distance = 0.0
-  	
   	# Loop through each user in the team
   	team.users.each do |user|
+      total_distance = 0.0
   		# Don't even try if user haven't set nike id and pass.
   		unless user.nike_id.blank? and user.nike_password.blank?
   			begin
@@ -21,6 +20,8 @@ task :sync_nike_plus  => :environment do
               total_distance += activity.metrics.distance 
             end
 	  			end
+          user.total_distance = total_distance
+          user.save
 	  		rescue RuntimeError => ex
 	  			# We rescue runtime error, which is bad of course but that is what 
 	  			# we are gonna get if we are unable to connect to Nike+ with Nike Id and Password
@@ -29,9 +30,6 @@ task :sync_nike_plus  => :environment do
 	  		end
   		end
   	end
-
-  	team.total_distance = total_distance
-  	team.save
   end
 
   puts "Completed Nike+ sync at " + Time.now.to_s
