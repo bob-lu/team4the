@@ -28,7 +28,7 @@
 		<ol>
 			<% @teams.sort_by{|team| [team.average_achievement_points, team.name]}.reverse.each do |team|%>
 			<li>
-				<a rel="tooltip" data-original-title="<%= team.users.map{|u| u.username + " (" + u.total_achievement_points.to_s + "p)" }.join(", ") -%>"><%= team.name -%></a> - 
+				<a rel="tooltip" data-original-title="<%= team.users.map{|u| u.username + " (" + u.total_achievement_points.to_s + "p)" }.join("<br/>") -%>"><%= team.name -%></a> - 
 				<strong>Snitt:</strong> <%= "%.2f" % team.average_achievement_points -%> 
 				/ <strong>Totalt:</strong> <%= team.achievement_points -%> poäng
 			</li>
@@ -38,7 +38,7 @@
 		<ol>
 			<% @teams.sort_by{|team| [team.total_ranking, team.name]}.each do |team| %>
 				<li>
-					<a rel="tooltip" data-original-title="<%= team.users.map{|u| u.username}.join(", ") -%>"><%= team.name -%></a> - 
+					<a rel="tooltip" data-original-title="<%= team.users.map{|u| u.username}.join("<br/>") -%>"><%= team.name -%></a> - 
 					<strong>Rankingpoäng:</strong> <%= team.total_ranking -%>p
 				</li>
 			<% end -%>
