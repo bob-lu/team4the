@@ -37,4 +37,13 @@ class Team < ActiveRecord::Base
   	end
   	total_points
   end
+
+  def total_ranking
+    teams = Team.all.to_a
+    distance_ranking = (teams.sort_by{|team| [team.average_distance, team.name] }.reverse.index self) + 1
+    workout_ranking = (teams.sort_by{|team| [team.average_workouts, team.name] }.reverse.index self) + 1
+    achievement_ranking = ((teams.sort_by{|team| [team.average_achievement_points, team.name] }.reverse.index self) + 1) * 2
+
+    distance_ranking + workout_ranking + achievement_ranking
+  end
 end

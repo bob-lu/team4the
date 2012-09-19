@@ -8,9 +8,9 @@
 		<ol>
 			<% @teams.sort_by{|team| [team.average_distance, team.name] }.reverse.each do |team| %>
 				<li>
-					<abbr title="<%= team.users.map{|u| u.username + " (" + ("%.1f" % u.total_distance).to_s + " km)"  }.join(", ") -%>"><%= team.name -%></abbr> 
-					(<strong>Snitt:</strong> <%= "%.2f" % team.average_distance -%> km 
-					/ <strong>Totalt:</strong> <%= "%.1f" % team.total_distance -%> km)
+					<abbr title="<%= team.users.map{|u| u.username + " (" + ("%.1f" % u.total_distance).to_s + " km)"  }.join(", ") -%>"><%= team.name -%></abbr> - 
+					<strong>Snitt:</strong> <%= "%.2f" % team.average_distance -%> km 
+					/ <strong>Totalt:</strong> <%= "%.1f" % team.total_distance -%> km
 				</li>
 			<% end -%>
 		</ol>
@@ -18,9 +18,9 @@
 		<ol>
 		<% @teams.sort_by{|team| [team.average_workouts, team.name] }.reverse.each do |team|%>
 			<li>
-				<abbr title="<%= team.users.map{|u| u.username + " (" + u.workouts.count.to_s + ")" }.join(", ") -%>"><%= team.name -%></abbr> 
-				(<strong>Snitt:</strong> <%= "%.2f" % team.average_workouts -%> 
-				/ <strong>Totalt:</strong> <%= team.workouts -%> tillfällen)
+				<abbr title="<%= team.users.map{|u| u.username + " (" + u.workouts.count.to_s + ")" }.join(", ") -%>"><%= team.name -%></abbr> - 
+				<strong>Snitt:</strong> <%= "%.2f" % team.average_workouts -%> 
+				/ <strong>Totalt:</strong> <%= team.workouts -%> tillfällen
 			</li>
 		<% end -%>
 		</ol>
@@ -28,10 +28,19 @@
 		<ol>
 			<% @teams.sort_by{|team| [team.average_achievement_points, team.name]}.reverse.each do |team|%>
 			<li>
-				<abbr title="<%= team.users.map{|u| u.username + " (" + u.total_achievement_points.to_s + "p)" }.join(", ") -%>"><%= team.name -%></abbr> 
-				(<strong>Snitt:</strong> <%= "%.2f" % team.average_achievement_points -%> 
-				/ <strong>Totalt:</strong> <%= team.achievement_points -%> poäng)
+				<abbr title="<%= team.users.map{|u| u.username + " (" + u.total_achievement_points.to_s + "p)" }.join(", ") -%>"><%= team.name -%></abbr> - 
+				<strong>Snitt:</strong> <%= "%.2f" % team.average_achievement_points -%> 
+				/ <strong>Totalt:</strong> <%= team.achievement_points -%> poäng
 			</li>
+			<% end -%>
+		</ol>
+		<h4>Total ranking</h4>
+		<ol>
+			<% @teams.sort_by{|team| [team.total_ranking, team.name]}.each do |team| %>
+				<li>
+					<abbr title="<%= team.users.map{|u| u.username}.join(", ") -%>"><%= team.name -%></abbr> - 
+					<strong>Rankingpoäng:</strong> <%= team.total_ranking -%>p
+				</li>
 			<% end -%>
 		</ol>
 	</div>
