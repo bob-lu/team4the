@@ -22,10 +22,10 @@ task :sync_nike_plus  => :environment do
 	  			end
           user.total_distance = total_distance
           user.save
-	  		rescue RuntimeError => ex
+	  		rescue Exception => ex
 	  			# We rescue runtime error, which is bad of course but that is what 
 	  			# we are gonna get if we are unable to connect to Nike+ with Nike Id and Password
-
+          puts "ERROR IN SYNC for #{user.username}: #{ex.message}"
 	  			# TODO: Add some logging.
 	  		end
   		end
