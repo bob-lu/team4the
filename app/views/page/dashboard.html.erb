@@ -90,7 +90,7 @@
 		
 		<h4>Träningstillfällen i ditt team</h4>
 		<div class="list">
-		<% @team_workouts.sort_by{|w|w.workout_date}.each do |workout| %>
+		<% @team_workouts.sort_by{|w|w.workout_date}.reverse.each do |workout| %>
 			<p>
 				<%= workout.description %>
 				-
