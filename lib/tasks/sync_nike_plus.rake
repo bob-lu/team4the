@@ -14,7 +14,9 @@ task :sync_nike_plus  => :environment do
   		# Don't even try if user haven't set nike id and pass.
   		unless user.nike_id.blank? and user.nike_password.blank?
   			begin
-	  			activities = user.nike.activities! # Use bang to disable cache.
+	  			activities = user.nike.activities
+          next if activities.nil? or activities.any?.eql?(false)
+
 	  			activities.each do |activity|
             if activity.start_time_utc.utc > competition_start_time && activity.metrics.distance > 0.9
               total_distance += activity.metrics.distance 

@@ -19,6 +19,6 @@ class User < ActiveRecord::Base
   private
   
   def nike_connection
-    @c = ::Nike::Client.new(self.nike_id, self.nike_password) if @c.nil?
+    @c = ::Nike::Client.new(self.nike_id, self.nike_password, caching: false) if @c.nil?
   end
 end
