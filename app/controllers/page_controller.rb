@@ -17,7 +17,7 @@ class PageController < ApplicationController
 		@team_workouts = Array.new
 		current_user.team.users.each do |user|
 			next if current_user == user
-			Workout.where(:user_id => user.id).order(:workout_date).reverse_order.each do |workout|
+			user.workouts.each do |workout|
 				@team_workouts.push workout
 			end
 		end
