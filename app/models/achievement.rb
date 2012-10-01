@@ -135,7 +135,7 @@ class Achievement < ActiveRecord::Base
         # Number of chins
         value = value.to_i
         chin_point = 1 if value > 0
-        sets = (value - 1) / 5
+        sets = value / 5
         chin_point += (sets * 2) if sets > 0
 
         create_or_update_point user, chin_point, user_val
